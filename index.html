@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enaizando — Diário de Vinhos</title>
+  <title>Enraizando — Diário de Vinhos</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -658,41 +658,39 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-const supabaseUrl = 'https://bkisbfbkaztanpmoogdl.supabase.co';
-const supabaseKey = 'sb_publishable_qIz454NuGnxQGydXxippXg_QAO6-VZe';
-// Observe o "window.supabase" abaixo, ele ajuda o navegador a encontrar a biblioteca
-const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-);
-</script>
+  // ── Configuração Supabase ──────────────────────────────
+  const supabaseUrl = 'https://bkisbfbkaztanpmoogdl.supabase.co';
+  const supabaseKey = 'sb_publishable_qIz454NuGnxQGydXxippXg_QAO6-VZe';
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-<script>
   // ── State ──────────────────────────────────────────────
   let wines = [];
   let currentFilter = 'all';
   let detailIndex = null;
   let photoData = null;
 
- async function init() {
-  const { data, error } = await supabase
-    .from("wines")
-    .select("*")
-    .order("created_at", { ascending: false });
+  // ── Inicialização ──────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', init);
 
-  if (!error && data) {
-    wines = data;
+  async function init() {
+    const { data, error } = await supabase
+      .from("wines")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      wines = data;
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('f-date');
+    if(dateInput) dateInput.value = today;
+
+    renderList();
+    updateHeader();
+    renderStars(7);
   }
-
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('f-date').value = today;
-
-  renderList();
-  updateHeader();
-  updateStats();
-  renderStars(7);
-}
-
 
   // ── Tabs ───────────────────────────────────────────────
   function switchTab(t) {
@@ -881,40 +879,42 @@ const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
   // ── Save ───────────────────────────────────────────────
   async function saveWine() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) {
-    document.getElementById('f-name').focus();
-    return;
+    const name = document.getElementById('f-name').value.trim();
+    if (!name) {
+      document.getElementById('f-name').focus();
+      return;
+    }
+
+    const wine = {
+      name,
+      grape: document.getElementById('f-grape-custom').value.trim(),
+      vintage: document.getElementById('f-vintage').value,
+      score: parseFloat(document.getElementById('score-range').value),
+      date: document.getElementById('f-date').value,
+      local: document.getElementById('f-local').value.trim(),
+      region: document.getElementById('f-region').value.trim(),
+      notes: document.getElementById('f-notes').value.trim(),
+      photo: photoData,
+    };
+
+    const { data, error } = await supabase
+      .from("wines")
+      .insert([wine])
+      .select();
+
+    if (error) {
+      console.log(error);
+      alert("Erro ao salvar no banco de dados.");
+      return;
+    }
+
+    if (data && data[0]) {
+      wines.unshift(data[0]);
+      renderList();
+      updateHeader();
+      closeAdd();
+    }
   }
-
-  const wine = {
-    id: Date.now(),
-    name,
-    grape: document.getElementById('f-grape-custom').value.trim(),
-    vintage: document.getElementById('f-vintage').value,
-    score: parseFloat(document.getElementById('score-range').value),
-    date: document.getElementById('f-date').value,
-    local: document.getElementById('f-local').value.trim(),
-    region: document.getElementById('f-region').value.trim(),
-    notes: document.getElementById('f-notes').value.trim(),
-    photo: photoData,
-  };
-
-  const { error } = await supabase
-    .from("wines")
-    .insert([wine]);
-
-  if (error) {
-    console.log(error);
-    alert("Erro ao salvar");
-    return;
-  }
-
-  wines.unshift(wine);
-  renderList();
-  updateHeader();
-  closeAdd();
-}
 
   // ── Detail modal ───────────────────────────────────────
   function openDetail(idx) {
@@ -948,34 +948,34 @@ const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
   }
 
   async function deleteWine() {
-  if (detailIndex === null) return;
+    if (detailIndex === null) return;
+    const wine = wines[detailIndex];
 
-  const wine = wines[detailIndex];
+    if (!confirm('Excluir este vinho da adega?')) return;
 
-  if (!confirm('Excluir este vinho da adega?')) return;
+    const { error } = await supabase
+      .from("wines")
+      .delete()
+      .eq("id", wine.id);
 
-  await supabase
-    .from("wines")
-    .delete()
-    .eq("id", wine.id);
+    if (error) {
+      alert("Erro ao excluir");
+      return;
+    }
 
-  wines.splice(detailIndex, 1);
-
-  renderList();
-  updateHeader();
-  closeDetail();
-}
+    wines.splice(detailIndex, 1);
+    renderList();
+    updateHeader();
+    closeDetail();
+  }
 
   // ── Close on backdrop click ────────────────────────────
-  document.getElementById('modal-add').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeAdd();
-  });
-  document.getElementById('modal-detail').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeDetail();
-  });
-
-  // ── Start ──────────────────────────────────────────────
-  init();
+  window.onclick = function(event) {
+    const addModal = document.getElementById('modal-add');
+    const detailModal = document.getElementById('modal-detail');
+    if (event.target == addModal) closeAdd();
+    if (event.target == detailModal) closeDetail();
+  }
 </script>
 </body>
 </html>
