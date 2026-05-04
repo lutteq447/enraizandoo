@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enaizando — Diário de Vinhos</title>
+  <title>Enraizando — Diário de Vinhos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -33,13 +33,116 @@
       min-height: 100vh;
     }
 
+    /* ── Auth Screen ── */
+    #auth-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: var(--wine-dark);
+    }
+    .auth-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 28px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    }
+    .auth-logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .auth-logo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--wine-dark);
+      font-weight: 600;
+    }
+    .auth-logo-sub {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+    .auth-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-light);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all .2s;
+    }
+    .auth-tab.active {
+      color: var(--wine);
+      border-bottom-color: var(--wine);
+    }
+    .auth-field { margin-bottom: 14px; }
+    .auth-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .auth-input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      background: #fff;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .auth-input:focus { border-color: var(--wine-light); }
+    .auth-btn {
+      width: 100%;
+      background: var(--wine);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background .2s;
+    }
+    .auth-btn:hover { background: var(--wine-light); }
+    .auth-btn:disabled { opacity: .6; cursor: not-allowed; }
+    .auth-error {
+      color: #E24B4A;
+      font-size: 12px;
+      margin-top: 10px;
+      text-align: center;
+      min-height: 18px;
+    }
+
+    /* ── App ── */
+    #app-screen { display: none; }
+
     .app {
       max-width: 680px;
       margin: 0 auto;
       padding-bottom: 80px;
     }
 
-    /* ── Header ── */
     .header {
       background: var(--wine-dark);
       padding: 20px 24px 16px;
@@ -85,6 +188,27 @@
       margin-top: 2px;
       font-family: 'DM Sans', sans-serif;
     }
+    .logout-btn {
+      background: rgba(255,255,255,.15);
+      border: none;
+      color: rgba(255,255,255,.8);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      letter-spacing: .5px;
+      transition: background .2s;
+      position: relative;
+    }
+    .logout-btn:hover { background: rgba(255,255,255,.25); }
+    .user-email {
+      color: rgba(255,255,255,.5);
+      font-size: 10px;
+      letter-spacing: .5px;
+      margin-top: 2px;
+      text-align: right;
+    }
     .header-stats {
       display: flex;
       gap: 16px;
@@ -106,7 +230,6 @@
       margin-top: 1px;
     }
 
-    /* ── Tabs ── */
     .tabs {
       display: flex;
       border-bottom: 1px solid var(--border);
@@ -132,7 +255,6 @@
       border-bottom-color: var(--wine);
     }
 
-    /* ── Content ── */
     .content { padding: 16px; }
 
     .add-btn {
@@ -156,7 +278,6 @@
     .add-btn:hover { background: var(--wine-light); }
     .add-btn::before { content: '+'; font-size: 20px; font-weight: 300; line-height: 1; }
 
-    /* ── Wine Cards ── */
     .wine-card {
       background: #fff;
       border-radius: 12px;
@@ -235,7 +356,6 @@
       text-overflow: ellipsis;
     }
 
-    /* ── Modals ── */
     .modal-bg {
       display: none;
       position: fixed;
@@ -282,7 +402,6 @@
     }
     .modal-body { padding: 20px; }
 
-    /* ── Form ── */
     .field { margin-bottom: 14px; }
     .label {
       display: block;
@@ -309,7 +428,6 @@
     textarea.input { resize: vertical; min-height: 72px; }
     .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    /* ── Score ── */
     .score-area { margin-bottom: 14px; }
     .score-display {
       text-align: center;
@@ -329,7 +447,6 @@
     .star.lit { fill: var(--gold); }
     input[type="range"] { width: 100%; accent-color: var(--wine); }
 
-    /* ── Photo ── */
     .photo-upload {
       border: 1.5px dashed var(--border);
       border-radius: 10px;
@@ -351,7 +468,6 @@
       margin-top: 8px;
     }
 
-    /* ── Grape chips ── */
     .grape-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
     .chip {
       padding: 5px 12px;
@@ -380,13 +496,12 @@
       transition: background .2s;
     }
     .save-btn:hover { background: var(--wine-light); }
+    .save-btn:disabled { opacity: .6; cursor: not-allowed; }
 
-    /* ── Empty state ── */
     .empty { text-align: center; padding: 48px 20px; color: var(--text-light); }
     .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: .5; }
     .empty p { font-size: 14px; line-height: 1.6; }
 
-    /* ── Filter bar ── */
     .filter-bar {
       display: flex;
       gap: 8px;
@@ -410,7 +525,6 @@
     }
     .f-chip.active { background: var(--wine); color: #fff; border-color: var(--wine); }
 
-    /* ── Stats ── */
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
     .stat-card {
       background: #fff;
@@ -437,7 +551,6 @@
     .grape-bar-bg { background: var(--cream-dark); border-radius: 4px; height: 6px; }
     .grape-bar-fill { background: var(--wine); border-radius: 4px; height: 6px; transition: width .5s; }
 
-    /* ── Detail modal ── */
     .detail-photo {
       width: 100%;
       max-height: 220px;
@@ -491,62 +604,121 @@
       cursor: pointer;
       margin-top: 14px;
     }
+
+    /* Loading spinner */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
 
-<div class="app" id="app">
-
-  <div class="header">
-    <div class="header-top">
-      <div>
-        <div class="logo">🍷 Enraizando</div>
-        <div class="logo-sub">Diário de vinhos</div>
-      </div>
+<!-- ── Tela de Login ── -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div style="font-size:36px;margin-bottom:8px">🍷</div>
+      <div class="auth-logo-title">Enraizando</div>
+      <div class="auth-logo-sub">Diário de vinhos</div>
     </div>
-    <div class="header-stats">
-      <div class="stat"><div class="stat-n" id="h-total">0</div><div class="stat-l">vinhos</div></div>
-      <div class="stat"><div class="stat-n" id="h-avg">—</div><div class="stat-l">nota média</div></div>
-      <div class="stat"><div class="stat-n" id="h-top">—</div><div class="stat-l">top uva</div></div>
+
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tab-login-btn" onclick="switchAuthTab('login')">Entrar</div>
+      <div class="auth-tab" id="tab-signup-btn" onclick="switchAuthTab('signup')">Criar conta</div>
+    </div>
+
+    <div id="auth-login">
+      <div class="auth-field">
+        <label class="auth-label">E-mail</label>
+        <input class="auth-input" id="login-email" type="email" placeholder="seu@email.com">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Senha</label>
+        <input class="auth-input" id="login-password" type="password" placeholder="••••••••">
+      </div>
+      <button class="auth-btn" id="login-btn" onclick="doLogin()">Entrar na adega</button>
+      <div class="auth-error" id="login-error"></div>
+    </div>
+
+    <div id="auth-signup" style="display:none">
+      <div class="auth-field">
+        <label class="auth-label">E-mail</label>
+        <input class="auth-input" id="signup-email" type="email" placeholder="seu@email.com">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Senha</label>
+        <input class="auth-input" id="signup-password" type="password" placeholder="Mínimo 6 caracteres">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Confirmar senha</label>
+        <input class="auth-input" id="signup-confirm" type="password" placeholder="Repita a senha">
+      </div>
+      <button class="auth-btn" id="signup-btn" onclick="doSignup()">Criar minha conta</button>
+      <div class="auth-error" id="signup-error"></div>
     </div>
   </div>
+</div>
 
-  <div class="tabs">
-    <div class="tab active" onclick="switchTab('list')">Minha adega</div>
-    <div class="tab" onclick="switchTab('stats')">Estatísticas</div>
-  </div>
+<!-- ── App principal ── -->
+<div id="app-screen">
+  <div class="app" id="app">
 
-  <div class="content">
-
-    <!-- Lista de vinhos -->
-    <div id="tab-list">
-      <button class="add-btn" onclick="openAdd()">Registrar novo vinho</button>
-      <div class="filter-bar" id="filter-bar">
-        <div class="f-chip active" onclick="setFilter('all', this)">Todos</div>
-        <div class="f-chip" onclick="setFilter('Cabernet Sauvignon', this)">Cabernet Sauvignon</div>
-        <div class="f-chip" onclick="setFilter('Malbec', this)">Malbec</div>
-        <div class="f-chip" onclick="setFilter('Pinot Noir', this)">Pinot Noir</div>
-        <div class="f-chip" onclick="setFilter('Merlot', this)">Merlot</div>
-        <div class="f-chip" onclick="setFilter('Syrah', this)">Syrah</div>
-        <div class="f-chip" onclick="setFilter('Outro', this)">Outros</div>
+    <div class="header">
+      <div class="header-top">
+        <div>
+          <div class="logo">🍷 Enraizando</div>
+          <div class="logo-sub">Diário de vinhos</div>
+        </div>
+        <div style="text-align:right">
+          <button class="logout-btn" onclick="doLogout()">Sair</button>
+          <div class="user-email" id="user-email-display"></div>
+        </div>
       </div>
-      <div id="list-container"></div>
-    </div>
-
-    <!-- Estatísticas -->
-    <div id="tab-stats" style="display:none">
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-card-n" id="s-total">0</div><div class="stat-card-l">vinhos provados</div></div>
-        <div class="stat-card"><div class="stat-card-n" id="s-avg">—</div><div class="stat-card-l">nota média</div></div>
-        <div class="stat-card"><div class="stat-card-n" id="s-best">—</div><div class="stat-card-l">nota mais alta</div></div>
-        <div class="stat-card"><div class="stat-card-n" id="s-locals">—</div><div class="stat-card-l">locais visitados</div></div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px">
-        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);font-weight:500;margin-bottom:12px">Uvas favoritas</div>
-        <div id="grape-bars"></div>
+      <div class="header-stats">
+        <div class="stat"><div class="stat-n" id="h-total">0</div><div class="stat-l">vinhos</div></div>
+        <div class="stat"><div class="stat-n" id="h-avg">—</div><div class="stat-l">nota média</div></div>
+        <div class="stat"><div class="stat-n" id="h-top">—</div><div class="stat-l">top uva</div></div>
       </div>
     </div>
 
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('list')">Minha adega</div>
+      <div class="tab" onclick="switchTab('stats')">Estatísticas</div>
+    </div>
+
+    <div class="content">
+
+      <div id="tab-list">
+        <button class="add-btn" onclick="openAdd()">Registrar novo vinho</button>
+        <div class="filter-bar" id="filter-bar">
+          <div class="f-chip active" onclick="setFilter('all', this)">Todos</div>
+          <div class="f-chip" onclick="setFilter('Cabernet Sauvignon', this)">Cabernet Sauvignon</div>
+          <div class="f-chip" onclick="setFilter('Malbec', this)">Malbec</div>
+          <div class="f-chip" onclick="setFilter('Pinot Noir', this)">Pinot Noir</div>
+          <div class="f-chip" onclick="setFilter('Merlot', this)">Merlot</div>
+          <div class="f-chip" onclick="setFilter('Syrah', this)">Syrah</div>
+          <div class="f-chip" onclick="setFilter('Outro', this)">Outros</div>
+        </div>
+        <div id="list-container"><div class="loading">Carregando sua adega…</div></div>
+      </div>
+
+      <div id="tab-stats" style="display:none">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-card-n" id="s-total">0</div><div class="stat-card-l">vinhos provados</div></div>
+          <div class="stat-card"><div class="stat-card-n" id="s-avg">—</div><div class="stat-card-l">nota média</div></div>
+          <div class="stat-card"><div class="stat-card-n" id="s-best">—</div><div class="stat-card-l">nota mais alta</div></div>
+          <div class="stat-card"><div class="stat-card-n" id="s-locals">—</div><div class="stat-card-l">locais visitados</div></div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px">
+          <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);font-weight:500;margin-bottom:12px">Uvas favoritas</div>
+          <div id="grape-bars"></div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -618,7 +790,7 @@
         <input type="file" id="f-photo-input" accept="image/*" style="display:none" onchange="handlePhoto(this)">
         <img id="f-photo-preview" class="photo-preview">
       </div>
-      <button class="save-btn" onclick="saveWine()">Salvar na adega</button>
+      <button class="save-btn" id="save-btn" onclick="saveWine()">Salvar na adega</button>
     </div>
   </div>
 </div>
@@ -657,40 +829,129 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-const supabase = supabase.createClient(
-  "SUA_URL",
-  "SUA_ANON_KEY"
-);
-</script>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+  // ══════════════════════════════════════════════════
+  // ⚠️  SUBSTITUA OS VALORES ABAIXO PELAS SUAS CHAVES
+  // ══════════════════════════════════════════════════
+  const SUPABASE_URL  = "https://bkisbfkzatnpmoogdl.supabase.co";
+  const SUPABASE_KEY  = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJraXNiZmJrYXp0YW5wbW9vZ2RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5MDQ5MjYsImV4cCI6MjA5MzQ4MDkyNn0.mpp4lDmqomhKxG3Ech9T7FeDu912_6P6KllIvrIX-lg";
+  // ══════════════════════════════════════════════════
+
+  const { createClient } = supabase;
+  const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+
   // ── State ──────────────────────────────────────────────
   let wines = [];
   let currentFilter = 'all';
   let detailIndex = null;
   let photoData = null;
+  let currentUser = null;
 
- async function init() {
-  const { data, error } = await supabase
-    .from("wines")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (!error && data) {
-    wines = data;
+  // ── Auth tab switch ────────────────────────────────────
+  function switchAuthTab(tab) {
+    document.getElementById('auth-login').style.display  = tab === 'login'  ? 'block' : 'none';
+    document.getElementById('auth-signup').style.display = tab === 'signup' ? 'block' : 'none';
+    document.getElementById('tab-login-btn').classList.toggle('active',  tab === 'login');
+    document.getElementById('tab-signup-btn').classList.toggle('active', tab === 'signup');
+    document.getElementById('login-error').textContent  = '';
+    document.getElementById('signup-error').textContent = '';
   }
 
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('f-date').value = today;
+  // ── Login ──────────────────────────────────────────────
+  async function doLogin() {
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl    = document.getElementById('login-error');
+    const btn      = document.getElementById('login-btn');
 
-  renderList();
-  updateHeader();
-  updateStats();
-  renderStars(7);
-}
+    if (!email || !password) { errEl.textContent = 'Preencha e-mail e senha.'; return; }
 
+    btn.disabled = true;
+    btn.textContent = 'Entrando…';
+
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      errEl.textContent = 'E-mail ou senha incorretos.';
+      btn.disabled = false;
+      btn.textContent = 'Entrar na adega';
+    }
+    // onAuthStateChange cuida do resto
+  }
+
+  // ── Signup ─────────────────────────────────────────────
+  async function doSignup() {
+    const email    = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    const confirm  = document.getElementById('signup-confirm').value;
+    const errEl    = document.getElementById('signup-error');
+    const btn      = document.getElementById('signup-btn');
+
+    errEl.textContent = '';
+    if (!email || !password) { errEl.textContent = 'Preencha todos os campos.'; return; }
+    if (password.length < 6) { errEl.textContent = 'Senha deve ter pelo menos 6 caracteres.'; return; }
+    if (password !== confirm) { errEl.textContent = 'As senhas não coincidem.'; return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Criando conta…';
+
+    const { error } = await sb.auth.signUp({ email, password });
+
+    if (error) {
+      errEl.textContent = 'Erro ao criar conta: ' + error.message;
+      btn.disabled = false;
+      btn.textContent = 'Criar minha conta';
+    } else {
+      errEl.style.color = 'green';
+      errEl.textContent = 'Conta criada! Verifique seu e-mail para confirmar.';
+      btn.disabled = false;
+      btn.textContent = 'Criar minha conta';
+    }
+  }
+
+  // ── Logout ─────────────────────────────────────────────
+  async function doLogout() {
+    await sb.auth.signOut();
+  }
+
+  // ── Auth state listener ────────────────────────────────
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (session && session.user) {
+      currentUser = session.user;
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('app-screen').style.display  = 'block';
+      document.getElementById('user-email-display').textContent = currentUser.email;
+      await loadWines();
+      updateHeader();
+      updateStats();
+      renderStars(7);
+      document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+    } else {
+      currentUser = null;
+      wines = [];
+      document.getElementById('auth-screen').style.display = 'flex';
+      document.getElementById('app-screen').style.display  = 'none';
+    }
+  });
+
+  // ── Load wines from Supabase ───────────────────────────
+  async function loadWines() {
+    document.getElementById('list-container').innerHTML = '<div class="loading">Carregando sua adega…</div>';
+    const { data, error } = await sb
+      .from('wines')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (!error && data) {
+      wines = data;
+    }
+    renderList();
+    updateHeader();
+    updateStats();
+  }
 
   // ── Tabs ───────────────────────────────────────────────
   function switchTab(t) {
@@ -804,13 +1065,8 @@ const supabase = supabase.createClient(
     document.getElementById('grape-bars').innerHTML = sorted.length
       ? sorted.map(([g, c]) => `
           <div class="grape-bar-wrap">
-            <div class="grape-bar-label">
-              <span>${g}</span>
-              <span>${c} vinho${c > 1 ? 's' : ''}</span>
-            </div>
-            <div class="grape-bar-bg">
-              <div class="grape-bar-fill" style="width:${Math.round(c / max * 100)}%"></div>
-            </div>
+            <div class="grape-bar-label"><span>${g}</span><span>${c} vinho${c > 1 ? 's' : ''}</span></div>
+            <div class="grape-bar-bg"><div class="grape-bar-fill" style="width:${Math.round(c / max * 100)}%"></div></div>
           </div>`).join('')
       : '<div style="font-size:13px;color:var(--text-light)">Nenhuma uva registrada ainda</div>';
   }
@@ -838,6 +1094,9 @@ const supabase = supabase.createClient(
     document.getElementById('f-photo-input').value = '';
     photoData = null;
     document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+    const btn = document.getElementById('save-btn');
+    btn.disabled = false;
+    btn.textContent = 'Salvar na adega';
   }
 
   function selectGrape(el, val) {
@@ -846,7 +1105,6 @@ const supabase = supabase.createClient(
     document.getElementById('f-grape-custom').value = val;
   }
 
-  // ── Score slider ───────────────────────────────────────
   function updateScore(v) {
     document.getElementById('score-display').textContent = v;
     renderStars(parseFloat(v));
@@ -863,56 +1121,68 @@ const supabase = supabase.createClient(
     document.getElementById('score-stars').innerHTML = html;
   }
 
-  // ── Photo ──────────────────────────────────────────────
   function handlePhoto(input) {
     const file = input.files[0];
     if (!file) return;
+    // Reduz a imagem para não sobrecarregar o banco
     const reader = new FileReader();
     reader.onload = e => {
-      photoData = e.target.result;
-      const prev = document.getElementById('f-photo-preview');
-      prev.src = photoData;
-      prev.style.display = 'block';
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const max = 800;
+        let w = img.width, h = img.height;
+        if (w > max) { h = Math.round(h * max / w); w = max; }
+        if (h > max) { w = Math.round(w * max / h); h = max; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        photoData = canvas.toDataURL('image/jpeg', 0.75);
+        const prev = document.getElementById('f-photo-preview');
+        prev.src = photoData;
+        prev.style.display = 'block';
+      };
+      img.src = e.target.result;
     };
     reader.readAsDataURL(file);
   }
 
-  // ── Save ───────────────────────────────────────────────
+  // ── Save wine ──────────────────────────────────────────
   async function saveWine() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) {
-    document.getElementById('f-name').focus();
-    return;
+    const name = document.getElementById('f-name').value.trim();
+    if (!name) { document.getElementById('f-name').focus(); return; }
+
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true;
+    btn.textContent = 'Salvando…';
+
+    const wine = {
+      user_id: currentUser.id,
+      name,
+      grape:   document.getElementById('f-grape-custom').value.trim(),
+      vintage: document.getElementById('f-vintage').value,
+      score:   parseFloat(document.getElementById('score-range').value),
+      date:    document.getElementById('f-date').value,
+      local:   document.getElementById('f-local').value.trim(),
+      region:  document.getElementById('f-region').value.trim(),
+      notes:   document.getElementById('f-notes').value.trim(),
+      photo:   photoData,
+    };
+
+    const { data, error } = await sb.from('wines').insert([wine]).select().single();
+
+    if (error) {
+      alert('Erro ao salvar: ' + error.message);
+      btn.disabled = false;
+      btn.textContent = 'Salvar na adega';
+      return;
+    }
+
+    wines.unshift(data);
+    renderList();
+    updateHeader();
+    updateStats();
+    closeAdd();
   }
-
-  const wine = {
-    id: Date.now(),
-    name,
-    grape: document.getElementById('f-grape-custom').value.trim(),
-    vintage: document.getElementById('f-vintage').value,
-    score: parseFloat(document.getElementById('score-range').value),
-    date: document.getElementById('f-date').value,
-    local: document.getElementById('f-local').value.trim(),
-    region: document.getElementById('f-region').value.trim(),
-    notes: document.getElementById('f-notes').value.trim(),
-    photo: photoData,
-  };
-
-  const { error } = await supabase
-    .from("wines")
-    .insert([wine]);
-
-  if (error) {
-    console.log(error);
-    alert("Erro ao salvar");
-    return;
-  }
-
-  wines.unshift(wine);
-  renderList();
-  updateHeader();
-  closeAdd();
-}
 
   // ── Detail modal ───────────────────────────────────────
   function openDetail(idx) {
@@ -920,11 +1190,7 @@ const supabase = supabase.createClient(
     const w = wines[idx];
 
     const pa = document.getElementById('detail-photo-area');
-    if (w.photo) {
-      pa.innerHTML = `<img src="${w.photo}" alt="foto do vinho">`;
-    } else {
-      pa.innerHTML = '🍷';
-    }
+    pa.innerHTML = w.photo ? `<img src="${w.photo}" alt="foto do vinho">` : '🍷';
 
     document.getElementById('d-name').textContent    = w.name;
     document.getElementById('d-grape').textContent   = [w.grape, w.vintage].filter(Boolean).join(' · ') || '—';
@@ -946,34 +1212,26 @@ const supabase = supabase.createClient(
   }
 
   async function deleteWine() {
-  if (detailIndex === null) return;
+    if (detailIndex === null) return;
+    const wine = wines[detailIndex];
+    if (!confirm('Excluir este vinho da adega?')) return;
 
-  const wine = wines[detailIndex];
+    await sb.from('wines').delete().eq('id', wine.id);
 
-  if (!confirm('Excluir este vinho da adega?')) return;
+    wines.splice(detailIndex, 1);
+    renderList();
+    updateHeader();
+    updateStats();
+    closeDetail();
+  }
 
-  await supabase
-    .from("wines")
-    .delete()
-    .eq("id", wine.id);
-
-  wines.splice(detailIndex, 1);
-
-  renderList();
-  updateHeader();
-  closeDetail();
-}
-
-  // ── Close on backdrop click ────────────────────────────
+  // ── Close on backdrop ──────────────────────────────────
   document.getElementById('modal-add').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeAdd();
   });
   document.getElementById('modal-detail').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeDetail();
   });
-
-  // ── Start ──────────────────────────────────────────────
-  init();
 </script>
 </body>
 </html>
