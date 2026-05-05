@@ -841,7 +841,14 @@
   // ══════════════════════════════════════════════════
 
   const { createClient } = supabase;
-  const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+  const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    persistSession: true,
+    storageKey: 'enraizando-auth',
+    storage: window.localStorage,
+    lockAcquireTimeout: 10000
+  }
+});
 
   // ── State ──────────────────────────────────────────────
   let wines = [];
