@@ -842,10 +842,10 @@
 
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: {
+    storage: window.sessionStorage,
     persistSession: true,
-    storageKey: 'enraizando-auth',
-    storage: window.localStorage,
-    lock: async (name, acquireTimeout, fn) => fn()
+    autoRefreshToken: true,
+    detectSessionInUrl: true
   }
 });
 
