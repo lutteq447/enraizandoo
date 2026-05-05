@@ -915,6 +915,7 @@
   // ── Logout ─────────────────────────────────────────────
   async function doLogout() {
     await sb.auth.signOut();
+    window.location.reload();
   }
 
   // ── Auth state listener ────────────────────────────────
