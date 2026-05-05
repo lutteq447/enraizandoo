@@ -874,12 +874,13 @@
 
     const { error } = await sb.auth.signInWithPassword({ email, password });
 
-    if (error) {
+if (error) {
       errEl.textContent = 'E-mail ou senha incorretos.';
       btn.disabled = false;
       btn.textContent = 'Entrar na adega';
+    } else {
+      window.location.reload();
     }
-    // onAuthStateChange cuida do resto
   }
 
   // ── Signup ─────────────────────────────────────────────
